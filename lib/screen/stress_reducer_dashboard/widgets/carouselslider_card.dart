@@ -17,7 +17,6 @@ class CarouselsliderCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 38,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: 9, vertical: 25),
       decoration: BoxDecoration(

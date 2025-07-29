@@ -9,7 +9,8 @@ class StressreducerDashboardController with ChangeNotifier {
   final List<String> trackedoption = ["HRV", "Resting HR", "Breathing Rate"];
 
   //carousel slider
-  final SwiperController swiperController = SwiperController();
+  final PageController allinsightscontroller = PageController();
+
   int currentIndex = 0;
 
   bool isChecked1 = false;

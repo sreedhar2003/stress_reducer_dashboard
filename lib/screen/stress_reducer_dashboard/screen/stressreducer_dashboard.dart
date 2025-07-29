@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'package:stress_reducer_dashboard/helpers/appcolors.dart';
 import 'package:stress_reducer_dashboard/helpers/screen_config.dart';
 import 'package:stress_reducer_dashboard/helpers/size_extensions.dart';
@@ -416,8 +417,9 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                       ),
                     ],
                   ),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                  child: Column(children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text(
                           "All Insights & Alert",
@@ -427,60 +429,44 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        sizedBoxWithHeight(10),
-                        SizedBox(
-                          height: 88,
-                          width: double.infinity,
-                          child: Swiper(
-                            controller: provider.swiperController,
-                            itemCount: 3,
-                            viewportFraction: 0.8,
-                            scale: 0.9,
-                            onIndexChanged: (index) {
-                              setState(() {
-                                provider.currentIndex = index;
-                              });
-                            },
-                            itemBuilder: (BuildContext context, int index) {
-                              final items = [
-                                const CarouselsliderCard(
-                                    icon: Icons.nightlight_sharp,
-                                    subject:
-                                        "HRV dipped 15% post late-night screen usage",
-                                    datetime: "2025-07-10, 11:45 PM"),
-                                const CarouselsliderCard(
-                                    icon: Icons.work_rounded,
-                                    subject:
-                                        "Stress spike detected after 3+ hrs of continuous work",
-                                    datetime: "2025-07-11, 03:00 PM"),
-                                const CarouselsliderCard(
-                                    icon: Icons.sunny,
-                                    subject:
-                                        "Improved HRV observed with increased outdoor time.",
-                                    datetime: "2025-07-09, 09:00 AM"),
-                              ];
-                              return items[index];
-                            },
-                          ),
-                        ),
-                        sizedBoxWithHeight(10),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: List.generate(3, (index) {
-                            return Container(
-                              width: 8,
-                              height: 8,
-                              margin: const EdgeInsets.symmetric(horizontal: 4),
-                              decoration: BoxDecoration(
-                                shape: BoxShape.circle,
-                                color: provider.currentIndex == index
-                                    ? AppColors.green
-                                    : AppColors.grey,
-                              ),
-                            );
-                          }),
-                        ),
-                      ]),
+                      ],
+                    ),
+                    sizedBoxWithHeight(10),
+                    SizedBox(
+                      height: 90,
+                      child: PageView(
+                        controller: provider.allinsightscontroller,
+                        children: const [
+                          CarouselsliderCard(
+                              icon: Icons.nightlight_sharp,
+                              subject:
+                                  "HRV dipped 15% post late-night screen usage",
+                              datetime: "2025-07-10, 11:45 PM"),
+                          CarouselsliderCard(
+                              icon: Icons.work_rounded,
+                              subject:
+                                  "Stress spike detected after 3+ hrs of continuous work",
+                              datetime: "2025-07-11, 03:00 PM"),
+                          CarouselsliderCard(
+                              icon: Icons.sunny,
+                              subject:
+                                  "Improved HRV observed with increased outdoor time.",
+                              datetime: "2025-07-09, 09:00 AM"),
+                        ],
+                      ),
+                    ),
+                    sizedBoxWithHeight(10),
+                    SmoothPageIndicator(
+                      controller: provider.allinsightscontroller,
+                      count: 3,
+                      effect: WormEffect(
+                        dotHeight: 8,
+                        dotWidth: 8,
+                        activeDotColor: Colors.green,
+                        dotColor: Colors.grey.shade300,
+                      ),
+                    )
+                  ]),
                 ),
                 sizedBoxWithHeight(20),
                 Container(
