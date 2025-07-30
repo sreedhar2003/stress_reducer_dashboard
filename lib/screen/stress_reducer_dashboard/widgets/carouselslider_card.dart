@@ -5,12 +5,12 @@ import 'package:stress_reducer_dashboard/helpers/size_extensions.dart';
 import 'package:stress_reducer_dashboard/helpers/sizedbox.dart';
 
 class CarouselsliderCard extends StatelessWidget {
-  final IconData icon;
+  final String iconimage;
   final String subject;
   final String datetime;
   const CarouselsliderCard(
       {super.key,
-      required this.icon,
+      required this.iconimage,
       required this.subject,
       required this.datetime});
 
@@ -26,7 +26,12 @@ class CarouselsliderCard extends StatelessWidget {
       child: Center(
         child: Row(
           children: [
-            Icon(icon, color: AppColors.green, size: 30),
+            Image.asset(
+              iconimage,
+              height: 30,
+              width: 30,
+              fit: BoxFit.contain,
+            ),
             sizedBoxWithWidth(10),
             Expanded(
               child: Column(
@@ -47,7 +52,7 @@ class CarouselsliderCard extends StatelessWidget {
                   Text(
                     datetime,
                     style: GoogleFonts.roboto(
-                      color: AppColors.grey,
+                      color: AppColors.black,
                       fontSize: 8.sp,
                       fontWeight: FontWeight.w300,
                     ),

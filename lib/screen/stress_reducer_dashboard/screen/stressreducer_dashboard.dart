@@ -28,6 +28,7 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
     final provider = context.watch<StressreducerDashboardController>();
     ScreenUtil.getInstance().init(context);
     return Scaffold(
+      backgroundColor: AppColors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -118,26 +119,28 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                         ),
                       ),
                       sizedBoxWithHeight(10),
-                      Container(
-                        height: 37,
-                        width: 150,
-                        padding: const EdgeInsets.symmetric(horizontal: 10),
-                        decoration: BoxDecoration(
-                          color: AppColors.smallcontainercolor,
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Center(
+                      Align(
+                        alignment: Alignment.center,
+                        child: Container(
+                          height: 37,
+                          width: 150,
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          decoration: BoxDecoration(
+                            color: AppColors.smallcontainercolor,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
                           child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               const Icon(Icons.apple,
                                   size: 20, color: AppColors.black),
-                              sizedBoxWithWidth(5),
+                              sizedBoxWithWidth(10),
                               Text(
                                 "Apple Health",
                                 style: GoogleFonts.roboto(
                                   color: AppColors.black,
                                   fontSize: 14.sp,
-                                  fontWeight: FontWeight.w300,
+                                  fontWeight: FontWeight.w500,
                                 ),
                               ),
                             ],
@@ -145,13 +148,16 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                         ),
                       ),
                       sizedBoxWithHeight(10),
-                      Text(
-                        "Synced at 9:30 AM via Apple Health",
-                        maxLines: 2,
-                        style: GoogleFonts.roboto(
-                          color: AppColors.black,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w400,
+                      Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Synced at 9:30 AM via Apple Health",
+                          maxLines: 2,
+                          style: GoogleFonts.roboto(
+                            color: AppColors.grey,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w400,
+                          ),
                         ),
                       ),
                       sizedBoxWithHeight(10),
@@ -170,8 +176,8 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                         (index) => Padding(
                           padding: const EdgeInsets.only(right: 20),
                           child: Container(
-                            height: 30,
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 9, horizontal: 20),
                             decoration: BoxDecoration(
                               color: AppColors.smallcontainercolor,
                               borderRadius: BorderRadius.circular(30),
@@ -220,24 +226,33 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                         ),
                       ),
                       sizedBoxWithHeight(10),
-                      const Row(
+                      Row(
                         children: [
-                          StresssummaryCard(
-                              rating: "55 ms", subject: "HRV Average"),
-                          Spacer(),
-                          StresssummaryCard(
-                              rating: "62 bpm", subject: "Resting Heart Rate"),
+                          const Expanded(
+                            child: StresssummaryCard(
+                                rating: "55 ms", subject: "HRV Average"),
+                          ),
+                          sizedBoxWithWidth(20),
+                          const Expanded(
+                            child: StresssummaryCard(
+                                rating: "62 bpm",
+                                subject: "Resting Heart Rate"),
+                          ),
                         ],
                       ),
                       sizedBoxWithHeight(10),
-                      const Row(
+                      Row(
                         children: [
-                          StresssummaryCard(
-                              rating: "Stable", subject: "Mood Trends"),
-                          Spacer(),
-                          StresssummaryCard(
-                              rating: "3 Events",
-                              subject: "Stress Events Detected"),
+                          const Expanded(
+                            child: StresssummaryCard(
+                                rating: "Stable", subject: "Mood Trends"),
+                          ),
+                          sizedBoxWithWidth(20),
+                          const Expanded(
+                            child: StresssummaryCard(
+                                rating: "3 Events",
+                                subject: "Stress Events Detected"),
+                          ),
                         ],
                       )
                     ],
@@ -311,91 +326,135 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                         ),
                         sizedBoxWithHeight(10),
                         //graph
-                        SizedBox(
-                          height: 200,
-                          child: LineChart(
-                            LineChartData(
-                              titlesData: FlTitlesData(
-                                bottomTitles: AxisTitles(
-                                  sideTitles: SideTitles(
-                                    showTitles: true,
-                                    getTitlesWidget: (value, meta) {
-                                      const days = [
-                                        'Mon',
-                                        'Tue',
-                                        'Wed',
-                                        'Thu',
-                                        'Fri',
-                                        'Sat',
-                                        'Sun'
-                                      ];
-                                      return Text(
-                                        days[value.toInt()],
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: SizedBox(
+                            height: 280,
+                            child: LineChart(
+                              LineChartData(
+                                titlesData: FlTitlesData(
+                                  bottomTitles: AxisTitles(
+                                    sideTitles: SideTitles(
+                                      showTitles: true,
+                                      interval: 1,
+                                      reservedSize: 32,
+                                      getTitlesWidget: (value, meta) {
+                                        const days = [
+                                          'Mon',
+                                          'Tue',
+                                          'Wed',
+                                          'Thu',
+                                          'Fri',
+                                          'Sat',
+                                          'Sun'
+                                        ];
+                                        return Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 8.0),
+                                          child: Text(
+                                            days[value.toInt()],
+                                            style: GoogleFonts.roboto(
+                                              color: AppColors.grey,
+                                              fontSize: 10.sp,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ),
+                                  leftTitles: AxisTitles(
+                                    sideTitles: SideTitles(
+                                      showTitles: true,
+                                      reservedSize: 40,
+                                      interval: 10,
+                                      getTitlesWidget: (value, meta) => Text(
+                                        value.toInt().toString(),
                                         style: GoogleFonts.roboto(
-                                          color: AppColors.grey,
                                           fontSize: 8.sp,
-                                          fontWeight: FontWeight.w400,
+                                          color: AppColors.grey,
                                         ),
-                                      );
-                                    },
-                                    interval: 1,
-                                    reservedSize: 32,
+                                      ),
+                                    ),
+                                  ),
+                                  topTitles: const AxisTitles(
+                                    sideTitles: SideTitles(showTitles: false),
+                                  ),
+                                  rightTitles: const AxisTitles(
+                                    sideTitles: SideTitles(showTitles: false),
                                   ),
                                 ),
-                                leftTitles: const AxisTitles(
-                                  sideTitles: SideTitles(
-                                      showTitles: true, reservedSize: 40),
-                                ),
-                                topTitles: const AxisTitles(
-                                    sideTitles: SideTitles(showTitles: false)),
-                                rightTitles: const AxisTitles(
-                                    sideTitles: SideTitles(showTitles: false)),
-                              ),
-                              gridData: const FlGridData(show: true),
-                              borderData: FlBorderData(show: false),
-                              minX: 0,
-                              maxX: 6,
-                              minY: 0,
-                              maxY: 80,
-                              lineBarsData: [
-                                LineChartBarData(
-                                  isCurved: true,
-                                  color: AppColors.green,
-                                  barWidth: 3,
-                                  dotData: FlDotData(show: true),
-                                  belowBarData: BarAreaData(
-                                    show: true,
-                                    color: AppColors.containercolor,
+
+                                // ✅ Only horizontal lines, no vertical grid lines
+                                gridData: FlGridData(
+                                  show: true,
+                                  drawVerticalLine: false,
+                                  getDrawingHorizontalLine: (value) => FlLine(
+                                    color: Colors.grey.shade300,
+                                    strokeWidth: 1,
                                   ),
-                                  spots: const [
-                                    FlSpot(0, 50),
-                                    FlSpot(1, 55),
-                                    FlSpot(2, 52),
-                                    FlSpot(3, 60),
-                                    FlSpot(4, 53),
-                                    FlSpot(5, 58),
-                                    FlSpot(6, 66),
-                                  ],
                                 ),
-                                LineChartBarData(
-                                  isCurved: true,
-                                  color: AppColors.red,
-                                  barWidth: 2,
-                                  dotData: FlDotData(show: true),
-                                  belowBarData: BarAreaData(
+
+                                borderData: FlBorderData(
+                                  show: true,
+                                  border: const Border(
+                                    left: BorderSide(
+                                        color: Colors.grey, width: 1),
+                                    top: BorderSide.none,
+                                    right: BorderSide.none,
+                                    bottom: BorderSide.none,
+                                  ),
+                                ),
+
+                                minX: 0,
+                                maxX: 6,
+                                minY: 0,
+                                maxY: 80,
+
+                                lineBarsData: [
+                                  // Green Line
+                                  LineChartBarData(
+                                    isCurved: true,
+                                    color: AppColors.green,
+                                    barWidth: 3,
+                                    dotData: FlDotData(show: true),
+                                    belowBarData: BarAreaData(
                                       show: true,
-                                      color: AppColors.redcontainercolor),
-                                  spots: const [
-                                    FlSpot(0, 5),
-                                    FlSpot(1, 5),
-                                    FlSpot(2, 6),
-                                    FlSpot(3, 5),
-                                    FlSpot(4, 6),
-                                    FlSpot(5, 5),
-                                    FlSpot(6, 4),
-                                  ],
-                                )
-                              ],
+                                      color: AppColors.green.withOpacity(0.2),
+                                    ),
+                                    spots: const [
+                                      FlSpot(0, 50),
+                                      FlSpot(1, 55),
+                                      FlSpot(2, 52),
+                                      FlSpot(3, 60),
+                                      FlSpot(4, 53),
+                                      FlSpot(5, 58),
+                                      FlSpot(6, 66),
+                                    ],
+                                  ),
+
+                                  // Red Line
+                                  LineChartBarData(
+                                    isCurved: true,
+                                    color: AppColors.red,
+                                    barWidth: 2,
+                                    dotData: FlDotData(show: true),
+                                    belowBarData: BarAreaData(
+                                      show: true,
+                                      color: AppColors.red.withOpacity(0.2),
+                                    ),
+                                    spots: const [
+                                      FlSpot(0, 5),
+                                      FlSpot(1, 5),
+                                      FlSpot(2, 6),
+                                      FlSpot(3, 5),
+                                      FlSpot(4, 6),
+                                      FlSpot(5, 5),
+                                      FlSpot(6, 4),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -438,17 +497,17 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                         controller: provider.allinsightscontroller,
                         children: const [
                           CarouselsliderCard(
-                              icon: Icons.nightlight_sharp,
+                              iconimage: "assets/images/night_logo.png",
                               subject:
                                   "HRV dipped 15% post late-night screen usage",
                               datetime: "2025-07-10, 11:45 PM"),
                           CarouselsliderCard(
-                              icon: Icons.work_rounded,
+                              iconimage: "assets/images/workcase_logo.png",
                               subject:
                                   "Stress spike detected after 3+ hrs of continuous work",
                               datetime: "2025-07-11, 03:00 PM"),
                           CarouselsliderCard(
-                              icon: Icons.sunny,
+                              iconimage: "assets/images/sunny_logo.png",
                               subject:
                                   "Improved HRV observed with increased outdoor time.",
                               datetime: "2025-07-09, 09:00 AM"),
@@ -497,45 +556,81 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                         ),
                         sizedBoxWithHeight(20),
                         RelaxationCard(
-                            checkbox: Checkbox(
-                              value: provider.isChecked1,
-                              activeColor: AppColors.green,
-                              checkColor: AppColors.white,
-                              onChanged: (value) {
+                            checkbox: GestureDetector(
+                              onTap: () {
                                 setState(() {
-                                  provider.isChecked1 = value!;
+                                  provider.isChecked1 = !provider.isChecked1;
                                 });
                               },
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                  color: provider.isChecked1
+                                      ? AppColors.green
+                                      : AppColors.white,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: provider.isChecked1
+                                    ? const Icon(Icons.check,
+                                        color: AppColors.white, size: 20)
+                                    : null,
+                              ),
                             ),
                             subject: "Guided breathing exercise",
                             time: "5 min",
                             ontap: () {}),
                         sizedBoxWithHeight(10),
                         RelaxationCard(
-                            checkbox: Checkbox(
-                              value: provider.isChecked2,
-                              activeColor: AppColors.green,
-                              checkColor: AppColors.white,
-                              onChanged: (value) {
+                            checkbox: GestureDetector(
+                              onTap: () {
                                 setState(() {
-                                  provider.isChecked2 = value!;
+                                  provider.isChecked2 = !provider.isChecked2;
                                 });
                               },
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                  color: provider.isChecked2
+                                      ? AppColors.green
+                                      : AppColors.white,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: provider.isChecked2
+                                    ? const Icon(Icons.check,
+                                        color: AppColors.white, size: 20)
+                                    : null,
+                              ),
                             ),
                             subject: "Mindfulness audio session",
                             time: "10 min",
                             ontap: () {}),
                         sizedBoxWithHeight(10),
                         RelaxationCard(
-                            checkbox: Checkbox(
-                              value: provider.isChecked3,
-                              activeColor: AppColors.green,
-                              checkColor: AppColors.white,
-                              onChanged: (value) {
+                            checkbox: GestureDetector(
+                              onTap: () {
                                 setState(() {
-                                  provider.isChecked3 = value!;
+                                  provider.isChecked3 = !provider.isChecked3;
                                 });
                               },
+                              child: AnimatedContainer(
+                                duration: const Duration(milliseconds: 200),
+                                height: 20,
+                                width: 20,
+                                decoration: BoxDecoration(
+                                  color: provider.isChecked3
+                                      ? AppColors.green
+                                      : AppColors.white,
+                                  borderRadius: BorderRadius.circular(3),
+                                ),
+                                child: provider.isChecked3
+                                    ? const Icon(Icons.check,
+                                        color: AppColors.white, size: 20)
+                                    : null,
+                              ),
                             ),
                             subject: "Light stretch recommendation",
                             time: "3 min",
@@ -596,7 +691,7 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                             const Icon(
                               Icons.fiber_manual_record,
                               color: AppColors.black,
-                              size: 10,
+                              size: 5,
                             ),
                             sizedBoxWithWidth(5),
                             Expanded(
@@ -617,7 +712,7 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                           children: [
                             const Icon(
                               Icons.fiber_manual_record,
-                              size: 10,
+                              size: 5,
                               color: AppColors.black,
                             ),
                             sizedBoxWithWidth(5),
@@ -693,7 +788,7 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                               ],
                             ),
                             progressColor: AppColors.green,
-                            backgroundColor: AppColors.grey,
+                            backgroundColor: AppColors.maincontainer,
                             circularStrokeCap: CircularStrokeCap.round,
                           ),
                         ),

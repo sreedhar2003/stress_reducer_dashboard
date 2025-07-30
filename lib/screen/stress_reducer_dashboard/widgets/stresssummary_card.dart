@@ -15,12 +15,13 @@ class StresssummaryCard extends StatelessWidget {
     return Container(
       height: 81,
       width: 145,
-      padding: const EdgeInsets.all(5),
+      padding: const EdgeInsets.symmetric(vertical: 17, horizontal: 37),
       decoration: BoxDecoration(
           color: AppColors.containercolor,
           borderRadius: BorderRadius.circular(10),
           border: Border.all(color: AppColors.smallcontainercolor)),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           Text(
             rating,
@@ -30,7 +31,7 @@ class StresssummaryCard extends StatelessWidget {
               fontWeight: FontWeight.w600,
             ),
           ),
-          sizedBoxWithHeight(10),
+          sizedBoxWithHeight(5),
           Expanded(
             child: Text(
               subject,

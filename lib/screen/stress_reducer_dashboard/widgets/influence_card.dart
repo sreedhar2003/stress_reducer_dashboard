@@ -19,7 +19,8 @@ class InfluenceCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+        height: 42,
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         decoration: BoxDecoration(
           color: AppColors.maincontainer,
           borderRadius: BorderRadius.circular(10),
@@ -29,7 +30,7 @@ class InfluenceCard extends StatelessWidget {
             Icon(
               icon,
               size: 20,
-              color: AppColors.black,
+              color: AppColors.green,
             ),
             sizedBoxWithWidth(5),
             Text(
@@ -44,9 +45,9 @@ class InfluenceCard extends StatelessWidget {
             Text(
               rating,
               style: GoogleFonts.roboto(
-                color: AppColors.black,
-                fontSize: 12.sp,
-                fontWeight: FontWeight.w400,
+                color: AppColors.green,
+                fontSize: 15.sp,
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],
