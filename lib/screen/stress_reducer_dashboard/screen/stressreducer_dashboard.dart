@@ -240,7 +240,7 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                           ),
                         ],
                       ),
-                      sizedBoxWithHeight(10),
+                      sizedBoxWithHeight(20),
                       Row(
                         children: [
                           const Expanded(
@@ -813,7 +813,10 @@ class _StressReducerDashboardState extends State<StressReducerDashboard> {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(82),
                               gradient: const LinearGradient(
-                                colors: [AppColors.green, AppColors.lightgreen],
+                                colors: [
+                                  AppColors.gradientcolor1,
+                                  AppColors.gradientcolor2
+                                ],
                                 begin: Alignment.topLeft,
                                 end: Alignment.bottomRight,
                               ),

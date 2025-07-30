@@ -4,7 +4,8 @@ class AppColors {
   static const Color black = Colors.black;
   static const Color red = Color.fromRGBO(223, 14, 14, 1);
   static const Color green = Color.fromRGBO(52, 161, 65, 1);
-  static const Color lightgreen = Color.fromRGBO(83, 205, 97, 1);
+  static const Color gradientcolor1 = Color.fromRGBO(1, 167, 73, 1);
+  static const Color gradientcolor2 = Color.fromRGBO(1, 246, 120, 1);
   static const Color yellow = Color.fromRGBO(253, 191, 0, 1);
   static const Color smallcontainercolor = Color.fromRGBO(52, 161, 65, 0.3);
   static const Color containercolor = Color.fromRGBO(52, 161, 65, 0.1);
